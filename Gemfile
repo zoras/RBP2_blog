@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.1'
 gem 'authlogic'
+gem 'mysql', '2.8.1'
 
 group :test do
   gem 'cucumber-rails'
