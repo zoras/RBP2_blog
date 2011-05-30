@@ -1,3 +1,8 @@
 class User < ActiveRecord::Base
-  acts_as_authentic
+has_one :address
+has_many :posts
+
+acts_as_authentic
+
 end
+

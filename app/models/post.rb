@@ -1,9 +1,10 @@
 class Post < ActiveRecord::Base
-  validates_presence_of :title, :text
-  
   has_many :comments
-  
-  def to_s
-    title
+  belongs_to :user
+
+  def recent_commenters
+    self.comments.recent(5).collect{|comment| comment.user.login}.map{|commenter| "<li>#{commenter}</li>"}.join("")
   end
+
 end
+

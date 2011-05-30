@@ -1,5 +1,14 @@
-<% for post in @posts %>
-  <h2><%= link_to post, post %></h2>
-  
+<h1>Posts</h1>
+
+<h2>What people are talking about</h2>
+<% @popular_posts.each do |post| %>
+  <h4><%= link_to "#{post.title} (#{post.comments.length})", user_post_path(current_user,post) %></h4>
   <%= post.text %>
 <% end %>
+
+<h2>All Posts</h2>
+<% for post in @posts %>
+  <h4><%= link_to "#{post.title} (#{post.comments.length})", user_post_path(current_user,post) %></h4>
+  <%= post.text %>
+<% end %>
+
