@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @post.comments.build(params[:comment], :user_id => current_user.id)
 
-    if @comment.is_minimum_length? && @comment.save
+    if @comment.save
       flash[:notice] = "Comment has been created."
       redirect_to user_post_path(current_user,@post)
     else
