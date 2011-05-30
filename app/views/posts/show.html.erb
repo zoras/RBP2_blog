@@ -1,7 +1,18 @@
 <h2><%= @post.title %></h2>
 
 <%= @post.text %>
-
-<% if logged_in? %>
-  <%= link_to "New Comment", new_post_comment_path(@post) %>
+<h3>Hall of fame :: Recent Commenters</h3>
+<ul><%= raw @post.recent_commenters %></ul>
+<h3>All Comments</h3>
+<% @comments.each do |comment| %>
+  <p>
+  <i>Commented on:<%= comment.created_at %></i><br/>
+  <i>Commented by:<%= "#{comment.user.login}::#{comment}" %> </i><br/>
+  <%= comment.text %>
+  </p>
 <% end %>
+<% if logged_in? %>
+  <h3>Your Comment</h3>
+  <%= render :partial => 'comments/new' %>
+<% end %>
+
