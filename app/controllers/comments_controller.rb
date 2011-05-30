@@ -1,9 +1,8 @@
 class CommentsController < ApplicationController
-  before_filter :login_required
+  before_filter :login_required, :find_post
 
   def new
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.build
+    @comment = @post.comments.new
 
     respond_to do |format|
       format.html
@@ -12,10 +11,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @post = Post.find(params[:post_id])
-    @comment = Comment.new(params[:comment])
-    @comment.post_id = @post.id
-    @comment.user_id = current_user.id
+    @comment = @post.comments.build(params[:comment], :user_id => current_user.id)
 
     if @comment.is_minimum_length? && @comment.save
       flash[:notice] = "Comment has been created."
@@ -25,6 +21,11 @@ class CommentsController < ApplicationController
       render :action => "new"
     end
   end
+
+  private
+    def find_post
+      @post = Post.find(params[:post_id])
+    end
 
 end
 
