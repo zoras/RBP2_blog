@@ -9,7 +9,7 @@ group :development do
   gem 'rails', '3.0.6'
   gem 'authlogic'
   gem 'mysql', '2.8.1'
-  gem 'rake','0.8.7'
+  gem 'rake','12.3.3'
 end
 
 group :test do
